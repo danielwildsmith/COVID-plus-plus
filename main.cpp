@@ -5,6 +5,31 @@
 #include <vector>
 #include "Row.h"
 
+void mergeSortByCases(vector<Row> &rows, int left, int right)
+{   
+    if (left >= right) // base case
+        return;
+
+    int mid = left + (right - left) / 2;
+    mergeSortByCases(rows, left, mid);
+    mergeSortByCases(rows, mid + 1, right);
+    // merge the two sorted subarrays 
+    mergeCases(rows, left, mid, right);
+
+    // print results
+}
+
+void mergeCases(vector<Row> &rows, int left, int mid, int right)
+{   
+    int n1 = mid - left + 1;
+    int n2 = right - mid;
+}
+
+void mergeSortByDeaths()
+{
+
+}
+
 int main() {
 
     string file = "covidFull.csv";
@@ -59,7 +84,7 @@ int main() {
 
     while (running) {
         cout << "Please select an option to continue\n";
-        cout << "1. option1\n2. option2\n3. option3\n-1. Exit program\n";
+        cout << "1. Days with most cases\n2. Days with most deaths\n3. option3\n-1. Exit program\n";
         cin >> input;
 
         if (input == -1) { // exit
