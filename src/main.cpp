@@ -51,7 +51,7 @@ std::vector<Row> LoadCSVRows(string file) {
 }
 
 int main() {
-    std::vector<Row> rows = LoadCSVRows("covidFull.csv");
+    std::vector<Row> rows = LoadCSVRows("../covidFull.csv");
 
     bool running = true;
     // Initial messages
