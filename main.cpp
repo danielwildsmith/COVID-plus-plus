@@ -1,61 +1,64 @@
+#include <iomanip>
 #include <iostream>
 #include <fstream>
-#incude "Row.h"
+#include <sstream>
+#include <vector>
+#include "Row.h"
 using namespace std;
 
-int main()
-{
+int main() {
 
-    string file = "covidFull.cvs";
+    string file = "covidFull.csv";
     ifstream infile(file);
     string linefromfile;
 
-    vector<Row> row; // list of data
+    vector<Row> rows; // list of data
 
-    if(infile.is_open()){
-        getline(infile, linefromfile) // done for first line
+    if (infile.is_open()) {
+        getline(infile, linefromfile); // done for first line
 
-        while(getline(infile, linefromfile)){
+        while (getline(infile, linefromfile)) {
             istringstream stream(linefromfile);
             string buffer;
 
-            getline(steam, buffer, ',');
+            getline(stream, buffer, ',');
             int day = stoi(buffer);
 
-            getline(steam, buffer, ',');
+            getline(stream, buffer, ',');
             int month = stoi(buffer);
 
-            getline(steam, buffer, ',');
+            getline(stream, buffer, ',');
             int year = stoi(buffer);
 
-            getline(steam, buffer, ',');
+            getline(stream, buffer, ',');
             int cases = stoi(buffer);
 
-            getline(steam, buffer, ',');
+            getline(stream, buffer, ',');
             int deaths = stoi(buffer);
 
-            getline(steam, buffer, ',');
+            getline(stream, buffer, ',');
             string country = buffer;
 
-            getline(steam, buffer, ',');
-            getline(steam, buffer, ',');
-            getline(steam, buffer, ',');
-            getline(steam, buffer, ',');
+            getline(stream, buffer, ',');
+            getline(stream, buffer, ',');
+            getline(stream, buffer, ',');
+            getline(stream, buffer, ',');
             int rate = stoi(buffer);
 
             Row row = Row(day, month, year, cases, deaths, country, rate);
-            row.push_back(row);
+            rows.push_back(row);
 
         }
     }
 
+    //cout<< rows[0].getCountry();
     bool running = true;
 
     // Initial messages
     cout << "Hello! Welcome to COVID++\n";
     int input = 0;
 
-    while(running) {
+    while (running) {
         cout << "Please select an option to continue\n";
         cout << "1. option1\n2. option2\n3. option3\n-1. Exit program\n";
         cin >> input;
@@ -66,5 +69,5 @@ int main()
         }
     }
 //comment
-
+    return 0;
 }
