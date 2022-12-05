@@ -4,6 +4,8 @@
 
 #ifndef COVID_PLUS_PLUS_ROW_H
 #define COVID_PLUS_PLUS_ROW_H
+#include <string>
+using namespace std;
 
 class Row {
 private:
@@ -15,7 +17,7 @@ private:
     string country;
     int rate;
 public:
-    Row(int day, int month, int year, int cases, int deaths, const string &country, int rate);
+    Row(int day, int month, int year, int cases, int deaths, string country, int rate);
 
     int getDay() const;
 
@@ -27,13 +29,13 @@ public:
 
     int getDeaths() const;
 
-    const string &getCountry() const;
+    string getCountry() const;
 
     int getRate() const;
 };
 
 Row::Row(int day, int month, int year, int cases, int deaths,
-         const std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>> &country, int rate)
+         string country, int rate)
         : day(day), month(month), year(year), cases(cases), deaths(deaths), country(country), rate(rate) {}
 
 int Row::getDay() const {
@@ -56,7 +58,7 @@ int Row::getDeaths() const {
     return deaths;
 }
 
-const std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>> &Row::getCountry() const {
+string Row::getCountry() const {
     return country;
 }
 

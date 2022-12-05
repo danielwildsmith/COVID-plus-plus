@@ -4,7 +4,6 @@
 #include <sstream>
 #include <vector>
 #include "Row.h"
-using namespace std;
 
 int main() {
 
