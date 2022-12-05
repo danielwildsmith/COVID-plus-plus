@@ -6,19 +6,17 @@
 #include "Row.h"
 #include "sorting.cpp"
 
-int main() {
-
-    string file = "covidFull.csv";
+std::vector<Row> LoadCSVRows(string file) {
     ifstream infile(file);
-    string linefromfile;
+    string line;
 
     vector<Row> rows; // list of data
 
     if (infile.is_open()) {
-        getline(infile, linefromfile); // done for first line
+        getline(infile, line); // done for first line
 
-        while (getline(infile, linefromfile)) {
-            istringstream stream(linefromfile);
+        while (getline(infile, line)) {
+            istringstream stream(line);
             string buffer;
 
             getline(stream, buffer, ',');
@@ -47,9 +45,13 @@ int main() {
 
             Row row = Row(day, month, year, cases, deaths, country, rate);
             rows.push_back(row);
-
         }
     }
+    return rows;
+}
+
+int main() {
+    std::vector<Row> rows = LoadCSVRows("covidFull.csv");
 
     bool running = true;
     // Initial messages
