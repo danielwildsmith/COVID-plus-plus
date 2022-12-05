@@ -4,31 +4,7 @@
 #include <sstream>
 #include <vector>
 #include "Row.h"
-
-void mergeSortByCases(vector<Row> &rows, int left, int right)
-{   
-    if (left >= right) // base case
-        return;
-
-    int mid = left + (right - left) / 2;
-    mergeSortByCases(rows, left, mid);
-    mergeSortByCases(rows, mid + 1, right);
-    // merge the two sorted subarrays 
-    mergeCases(rows, left, mid, right);
-
-    // print results
-}
-
-void mergeCases(vector<Row> &rows, int left, int mid, int right)
-{   
-    int n1 = mid - left + 1;
-    int n2 = right - mid;
-}
-
-void mergeSortByDeaths()
-{
-
-}
+#include "sorting.cpp"
 
 int main() {
 
@@ -75,9 +51,7 @@ int main() {
         }
     }
 
-    //cout<< rows[0].getCountry();
     bool running = true;
-
     // Initial messages
     cout << "Hello! Welcome to COVID++\n";
     int input = 0;
@@ -92,6 +66,5 @@ int main() {
             break;
         }
     }
-//comment
     return 0;
 }
