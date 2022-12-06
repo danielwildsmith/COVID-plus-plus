@@ -141,7 +141,7 @@ void getMaxDeaths(vector<Row> &rows)
     cout << endl;
 
     int numbered = 1;
-    cout << "Countries with the Highest Cases: " << endl;
+    cout << "Countries with the Highest Deaths: " << endl;
     for(int i = sortedDeaths.size() - 1; i > sortedDeaths.size() - 6; i--)
         cout << numbered++ << ". " << sortedDeaths.at(i).first << ": " << sortedDeaths.at(i).second << endl;
     cout << endl;

@@ -63,13 +63,21 @@ int main() {
 
     while (running) {
         cout << "Please select an option to continue\n";
-        cout << "1. Days with most cases\n2. Days with most deaths\n3. option3\n-1. Exit program\n";
+        cout << "1. Days with most cases\n2. Days with most deaths\n3. Countries with Highest Deaths\n-1. Exit program\n";
         cin >> input;
 
         switch (input) {
             case 1:
                 // Prints the Country/date for top 5 highest cases days 
                 //mergeSortByCases(rows, 0, rows.size()-1);
+                break;
+            case 2:
+                // Prints the Country/date for top 5 highest cases days
+                //mergeSortByCases(rows, 0, rows.size()-1);
+                break;
+            case 3:
+                // Prints the Country for top 5 highest cases days
+                getMaxDeaths(rows);
                 break;
             case -1: // exit
                 running = false;
