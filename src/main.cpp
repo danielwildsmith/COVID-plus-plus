@@ -63,7 +63,7 @@ int main() {
         cout << "------------------------------------" << endl << endl;
 
         cout << "Please select an option to continue\n";
-        cout << "1. Days with most cases\n2. Days with most deaths\n3. Country Statistics\n4. Day Statistics\n-1. Exit program\n";
+        cout << "1. Days with Most Cases\n2. Days with Most Deaths\n3. Country Statistics\n4. Day Statistics\n5. Most Cases in 14 Days\n-1. Exit program\n";
         cin >> input;
         string userInput;
 
@@ -91,6 +91,9 @@ int main() {
                 cin >> day;
                 cin >> year;
                 getDayStatistics(rows,day, month, year);
+                break;
+            case 5:
+                getHighestCasesPerCapita(rows);
                 break;
             case -1: // exit
                 running = false;

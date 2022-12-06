@@ -306,3 +306,44 @@ void getCountryStatistics(vector<Row> &rows, string name) {
     cout << sortedDeathsOfCountry.at(sortedDeathsOfCountry.size() - 1).first << endl;
     cout << endl;
 }
+
+void getHighestCasesPerCapita(vector<Row> &rows) {
+    vector<std::pair<string, int>> unsortedRates;
+    for (const auto &row: rows) {
+        string countryOnDate = row.getCountry() + " on " + std::to_string(row.getMonth()) + "/";
+        countryOnDate += std::to_string(row.getDay()) + "/" + std::to_string(row.getYear());
+        unsortedRates.emplace_back(countryOnDate, row.getRate());
+    }
+
+    // Call both merge and shell sort. Only one sorted vector should be displayed when showing results
+    // Record time each sorting method takes
+    steady_clock::time_point begin = std::chrono::steady_clock::now();
+    vector<std::pair<string, int>> sortedRates = unsortedRates;
+    sortedRates = shellSort(sortedRates);
+    steady_clock::time_point end = steady_clock::now();
+    int shellTime = duration_cast<milliseconds>(end - begin).count();
+    cout << "Shell sort finished in " << shellTime << " milliseconds" << endl;
+
+    begin = steady_clock::now();
+    mergeSort(unsortedRates, 0, unsortedRates.size()-1);
+    end = steady_clock::now();
+    int mergeTime = duration_cast<milliseconds>(end - begin).count();
+    cout << "Merge sort finished in " << mergeTime << " milliseconds" << endl;
+
+    // Print percentage faster
+    if (shellTime < mergeTime) { // shell was faster
+        float percent = (1 - (float)shellTime / mergeTime) * 100.0;
+        cout << "Shell sort was " << fixed << showpoint << setprecision(2) << percent << "% faster than merge sort.\n\n";
+    } else { // merge was faster
+        float percent = (1 - (float)mergeTime / shellTime) * 100.0;
+        cout << "Merge sort was " << fixed << showpoint << setprecision(2) << percent << "% faster than shell sort.\n\n";
+    }
+
+
+    int numbered = 1;
+    cout << "Cumulative Number of Cases Recorded for 14 Days Per 100,000 People: " << endl;
+    for (int i = sortedRates.size() - 1; i > sortedRates.size() - 6; i--)
+        cout << numbered++ << ". " << sortedRates.at(i).first << ": " << sortedRates.at(i).second << endl;
+    cout << endl;
+
+}
