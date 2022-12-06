@@ -123,7 +123,9 @@ void getMaxDeaths(vector<Row> &rows)
     // Determine maximum deaths -> create a vector to hold deaths
     vector<std::pair<string, int>> unsortedDeaths;
     for(const auto& row : rows) {
-        unsortedDeaths.emplace_back(row.getCountry(), row.getDeaths());
+        string countryOnDate = row.getCountry() + " on " + std::to_string(row.getMonth()) + "/";
+        countryOnDate += std::to_string(row.getDay()) + "/" + std::to_string(row.getYear());
+        unsortedDeaths.emplace_back(countryOnDate, row.getDeaths());
     }
 
     // Call both merge and shell sort. Only one sorted vector should be displayed when showing results
@@ -141,7 +143,7 @@ void getMaxDeaths(vector<Row> &rows)
     cout << endl;
 
     int numbered = 1;
-    cout << "Countries with the Highest Deaths: " << endl;
+    cout << "Countries with the Highest Death Counts in a Day: " << endl;
     for(int i = sortedDeaths.size() - 1; i > sortedDeaths.size() - 6; i--)
         cout << numbered++ << ". " << sortedDeaths.at(i).first << ": " << sortedDeaths.at(i).second << endl;
     cout << endl;
