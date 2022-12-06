@@ -116,6 +116,7 @@ void getDayStatistics(vector<Row> &rows, int day, int month, int year)
     cout << "Countries with the Lowest Cases on " << month << "/" << day << "/" << year << ": " << endl;
     for(int i = 0; i < 5; i++)
         cout << numbered++ << ". " << sortedCases.at(i).first << ": " << sortedCases.at(i).second << endl;
+    cout << endl;
 }
 
 void getMaxDeaths(vector<Row> &rows)
@@ -146,5 +147,66 @@ void getMaxDeaths(vector<Row> &rows)
     cout << "Countries with the Highest Death Counts in a Day: " << endl;
     for(int i = sortedDeaths.size() - 1; i > sortedDeaths.size() - 6; i--)
         cout << numbered++ << ". " << sortedDeaths.at(i).first << ": " << sortedDeaths.at(i).second << endl;
+    cout << endl;
+}
+
+// Assumes input name is given with spaces rather than underscores
+void getCountryStatistics(vector<Row> &rows, string name) {
+    // CSV file records country names with spaces in two ways: stores spaces as ' ' or '_'
+    // to get all info about a country, parse through dataset with both possible strings
+    string nameUnderscored = "";
+    if(name.find(' ')) {
+        nameUnderscored = name;
+        for(int i = 0; i < nameUnderscored.length(); i++) {
+            if(nameUnderscored[i] == ' ')
+                nameUnderscored[i] = '_';
+        }
+    }
+
+    // Total Cases and Deaths
+    int cases = 0;
+    int deaths = 0;
+    for(auto row : rows) {
+        if(row.getCountry() == name || row.getCountry() == nameUnderscored) {
+            cases += row.getCases();
+            deaths += row.getDeaths();
+        }
+    }
+    // if country is invalid
+    if(cases == 0 || deaths == 0) {
+        cout << "Please enter a valid country name. Example: 'Japan'" << endl << endl;
+        return;
+    }
+
+    // Deadliest Day
+    vector<std::pair<string, int>> unsortedDeathsOfCountry;
+    for(const auto& row : rows) {
+        if(row.getCountry() == name || row.getCountry() == nameUnderscored) {
+            string countryOnDate = std::to_string(row.getMonth()) + "/";
+            countryOnDate += std::to_string(row.getDay()) + "/" + std::to_string(row.getYear());
+            unsortedDeathsOfCountry.emplace_back(countryOnDate, row.getDeaths());
+        }
+    }
+
+    // Call both merge and shell sort. Only one sorted vector should be displayed when showing results
+    // Record time each sorting method takes
+    steady_clock::time_point begin = std::chrono::steady_clock::now();
+    vector<std::pair<string, int>> sortedDeathsOfCountry = unsortedDeathsOfCountry;
+    sortedDeathsOfCountry = shellSort(sortedDeathsOfCountry);
+    steady_clock::time_point end = steady_clock::now();
+    cout << "Shell sort finished in " << duration_cast<microseconds>(end - begin).count() << " microseconds" << endl;
+
+    begin = steady_clock::now();
+    mergeSort(unsortedDeathsOfCountry, 0, unsortedDeathsOfCountry.size()-1);
+    end = steady_clock::now();
+    cout << "Merge sort finished in " << duration_cast<microseconds>(end - begin).count() << " microseconds" << endl;
+    cout << endl;
+
+    // display statistics
+    cout << name << " Statistics:" << endl;
+    cout << "Total Deaths: " << deaths << endl;
+    cout << "Total Cases: " << cases << endl;
+    cout << "Deadliest Day: " << sortedDeathsOfCountry.at(sortedDeathsOfCountry.size() - 1).second << " deaths on ";
+    cout << sortedDeathsOfCountry.at(sortedDeathsOfCountry.size() - 1).first << endl;
     cout << endl;
 }
