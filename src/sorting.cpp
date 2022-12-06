@@ -79,7 +79,11 @@ vector<std::pair<string, int>> shellSort(vector<std::pair<string, int>>& arr) {
 
 void getDayStatistics(vector<Row> &rows, int day, int month, int year)
 {
-    // TODO: if invalid day/month/year or day inputted has no data -> output message
+    // output message for invalid dates
+    if ((year < 2019) || (year > 2022) || (year == 2019 && day < 31) || (year == 2020 && month == 12 && day > 14))  {
+        cout << "Please enter a valid date from 2020 to 2022\n";
+        return;
+    }
 
     // Determine maximum/minimum cases -> create a vector to hold cases on specific day
     vector<std::pair<string, int>> unsortedCases;
