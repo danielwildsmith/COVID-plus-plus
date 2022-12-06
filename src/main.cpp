@@ -52,6 +52,7 @@ std::vector<Row> LoadCSVRows(string file) {
 
 int main() {
     std::vector<Row> rows = LoadCSVRows("../covidFull.csv");
+    // getDayStatistics(rows, 11, 3, 2020);
 
     bool running = true;
     // Initial messages
