@@ -64,21 +64,33 @@ int main() {
 
     while (running) {
         cout << "Please select an option to continue\n";
-        cout << "1. Days with most cases\n2. Days with most deaths\n3. Print the deadliest days\n-1. Exit program\n";
+        cout << "1. Days with most cases\n2. Days with most deaths\n3. Country Statistics\n4. Day Statistics\n-1. Exit program\n";
         cin >> input;
+        string userInput;
 
         switch (input) {
             case 1:
                 // Prints the Country/date for top 5 highest cases days 
-                //mergeSortByCases(rows, 0, rows.size()-1);
+                getMaxCases(rows);
                 break;
             case 2:
-                // Prints the Country/date for top 5 highest cases days
-                //mergeSortByCases(rows, 0, rows.size()-1);
+                // Prints the Country/date for top 5 highest death days
+                getMaxDeaths(rows);
                 break;
             case 3:
-                // Prints the top 5 highest death days
-                getMaxDeaths(rows);
+               // string country;
+               cout << "Enter a Country: \nIf country name is multiple words, separate them with \"_\" \nExample: United_States_of_America" << endl;
+                cin >> userInput;
+                getCountryStatistics(rows,userInput);
+                break;
+            case 4:
+                // string country;
+                cout << "Enter a Date in Month Day Year: \nExample: 12 06 2022" << endl;
+                int day,month,year;
+                cin >> month;
+                cin >> day;
+                cin >> year;
+                getDayStatistics(rows,day, month, year);
                 break;
             case -1: // exit
                 running = false;
