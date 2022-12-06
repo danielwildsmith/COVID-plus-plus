@@ -94,8 +94,8 @@ void getDayStatistics(vector<Row> &rows, int day, int month, int year)
 
     // Call both merge and shell sort. Only one sorted vector should be displayed when showing results
     // Record time each sorting method takes
-    steady_clock::time_point begin = std::chrono::steady_clock::now();
     vector<std::pair<string, int>> sortedCases = unsortedCases;
+    steady_clock::time_point begin = std::chrono::steady_clock::now();
     sortedCases = shellSort(sortedCases);
     steady_clock::time_point end = steady_clock::now();
     int shellTime = duration_cast<microseconds>(end - begin).count();
@@ -138,6 +138,7 @@ void getDayStatistics(vector<Row> &rows, int day, int month, int year)
     sortedDeaths = shellSort(sortedDeaths);
     mergeSort(unsortedDeaths, 0, unsortedDeaths.size()-1);
 
+    // Printing results
     numbered = 1;
     cout << "Countries with the Highest Deaths on " << month << "/" << day << "/" << year << ": " << endl;
     for(int i = sortedDeaths.size() - 1; i > sortedDeaths.size() - 6; i--)
@@ -163,18 +164,18 @@ void getMaxCases(vector<Row> &rows)
 
     // Call both merge and shell sort. Only one sorted vector should be displayed when showing results
     // Record time each sorting method takes
-    steady_clock::time_point begin = std::chrono::steady_clock::now();
     vector<std::pair<string, int>> sortedCases = unsortedCases;
+    steady_clock::time_point begin = std::chrono::steady_clock::now();
     sortedCases = shellSort(sortedCases);
     steady_clock::time_point end = steady_clock::now();
-    int shellTime =  duration_cast<microseconds>(end - begin).count();
-    cout << "Shell sort finished in " << shellTime << " microseconds" << endl;
+    int shellTime =  duration_cast<milliseconds>(end - begin).count();
+    cout << "Shell sort finished in " << shellTime << " milliseconds" << endl;
 
     begin = steady_clock::now();
     mergeSort(unsortedCases, 0, unsortedCases.size()-1);
     end = steady_clock::now();
-    int mergeTime = duration_cast<microseconds>(end - begin).count();
-    cout << "Merge sort finished in " << mergeTime << " microseconds" << endl;
+    int mergeTime = duration_cast<milliseconds>(end - begin).count();
+    cout << "Merge sort finished in " << mergeTime << " milliseconds" << endl;
 
     // Print percentage faster
     if (shellTime < mergeTime) { // shell was faster
@@ -204,18 +205,18 @@ void getMaxDeaths(vector<Row> &rows) {
 
     // Call both merge and shell sort. Only one sorted vector should be displayed when showing results
     // Record time each sorting method takes
-    steady_clock::time_point begin = std::chrono::steady_clock::now();
     vector<std::pair<string, int>> sortedDeaths = unsortedDeaths;
+    steady_clock::time_point begin = std::chrono::steady_clock::now();
     sortedDeaths = shellSort(sortedDeaths);
     steady_clock::time_point end = steady_clock::now();
-    int shellTime = duration_cast<microseconds>(end - begin).count();
-    cout << "Shell sort finished in " << shellTime << " microseconds" << endl;
+    int shellTime = duration_cast<milliseconds>(end - begin).count();
+    cout << "Shell sort finished in " << shellTime << " milliseconds" << endl;
 
     begin = steady_clock::now();
     mergeSort(unsortedDeaths, 0, unsortedDeaths.size() - 1);
     end = steady_clock::now();
-    int mergeTime = duration_cast<microseconds>(end - begin).count();
-    cout << "Merge sort finished in " << mergeTime << " microseconds" << endl;
+    int mergeTime = duration_cast<milliseconds>(end - begin).count();
+    cout << "Merge sort finished in " << mergeTime << " milliseconds" << endl;
 
     // Print percentage faster
     if (shellTime < mergeTime) { // shell was faster
