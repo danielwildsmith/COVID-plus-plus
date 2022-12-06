@@ -127,6 +127,28 @@ void getDayStatistics(vector<Row> &rows, int day, int month, int year)
     for(int i = 0; i < 5; i++)
         cout << numbered++ << ". " << sortedCases.at(i).first << ": " << sortedCases.at(i).second << endl;
     cout << endl;
+
+    vector<std::pair<string, int>> unsortedDeaths;
+    for(const auto& row : rows) {
+        if(row.getDay() == day && row.getMonth() == month && row.getYear() == year)
+            unsortedDeaths.emplace_back(row.getCountry(), row.getDeaths());
+    }
+
+    vector<std::pair<string, int>> sortedDeaths = unsortedDeaths;
+    sortedDeaths = shellSort(sortedDeaths);
+    mergeSort(unsortedDeaths, 0, unsortedDeaths.size()-1);
+
+    numbered = 1;
+    cout << "Countries with the Highest Deaths on " << month << "/" << day << "/" << year << ": " << endl;
+    for(int i = sortedDeaths.size() - 1; i > sortedDeaths.size() - 6; i--)
+        cout << numbered++ << ". " << sortedDeaths.at(i).first << ": " << sortedDeaths.at(i).second << endl;
+    cout << endl;
+
+    numbered = 1;
+    cout << "Countries with the Lowest Deaths on " << month << "/" << day << "/" << year << ": " << endl;
+    for(int i = 0; i < 5; i++)
+        cout << numbered++ << ". " << sortedDeaths.at(i).first << ": " << sortedDeaths.at(i).second << endl;
+    cout << endl;
 }
 
 void getMaxCases(vector<Row> &rows)
