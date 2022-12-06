@@ -117,3 +117,32 @@ void getDayStatistics(vector<Row> &rows, int day, int month, int year)
     for(int i = 0; i < 5; i++)
         cout << numbered++ << ". " << sortedCases.at(i).first << ": " << sortedCases.at(i).second << endl;
 }
+
+void getMaxDeaths(vector<Row> &rows)
+{
+    // Determine maximum deaths -> create a vector to hold deaths
+    vector<std::pair<string, int>> unsortedDeaths;
+    for(const auto& row : rows) {
+        unsortedDeaths.emplace_back(row.getCountry(), row.getDeaths());
+    }
+
+    // Call both merge and shell sort. Only one sorted vector should be displayed when showing results
+    // Record time each sorting method takes
+    steady_clock::time_point begin = std::chrono::steady_clock::now();
+    vector<std::pair<string, int>> sortedDeaths = unsortedDeaths;
+    sortedDeaths = shellSort(sortedDeaths);
+    steady_clock::time_point end = steady_clock::now();
+    cout << "Shell sort finished in " << duration_cast<microseconds>(end - begin).count() << " microseconds" << endl;
+
+    begin = steady_clock::now();
+    mergeSort(unsortedDeaths, 0, unsortedDeaths.size()-1);
+    end = steady_clock::now();
+    cout << "Merge sort finished in " << duration_cast<microseconds>(end - begin).count() << " microseconds" << endl;
+    cout << endl;
+
+    int numbered = 1;
+    cout << "Countries with the Highest Cases: " << endl;
+    for(int i = sortedDeaths.size() - 1; i > sortedDeaths.size() - 6; i--)
+        cout << numbered++ << ". " << sortedDeaths.at(i).first << ": " << sortedDeaths.at(i).second << endl;
+    cout << endl;
+}
