@@ -15,6 +15,10 @@ must be the directory "COVID-plus-plus/src" to access the CSV file.
 
 For GCC compiled environments (VSCode), the program should execute properly.
 
+### A Note About the Dataset
+Data points after November 2020 were randomly generated to satisfy the 100,000 data point requirement. 
+Results generated from data prior to this date, however, are accurate. 
+
 ### Maintainers
 - Pablo Moreno
 - Joseph Karch
