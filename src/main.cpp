@@ -85,7 +85,7 @@ int main() {
                 break;
             case 4:
                 // string country;
-                cout << "Enter a Date in Month Day Year: \nExample: 12 06 2022" << endl;
+                cout << "Enter a Date in Month Day Year: \nExample: 04 20 2020" << endl;
                 int day,month,year;
                 cin >> month;
                 cin >> day;
