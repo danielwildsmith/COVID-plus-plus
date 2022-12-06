@@ -52,10 +52,6 @@ std::vector<Row> LoadCSVRows(string file) {
 
 int main() {
     std::vector<Row> rows = LoadCSVRows("../covidFull.csv");
-    //getDayStatistics(rows, 11, 3, 2020);
-    //getDayStatistics(rows, 27, 12 ,2022);
-    //getMaxDeaths(rows);
-    //getCountryStatistics(rows, "Spain");
 
     bool running = true;
     // Initial messages
@@ -78,9 +74,10 @@ int main() {
                 getMaxDeaths(rows);
                 break;
             case 3:
-               // string country;
-               cout << "Enter a Country: \nIf country name is multiple words, separate them with \"_\" \nExample: United_States_of_America" << endl;
-                cin >> userInput;
+                // string country;
+                cout << "Enter a Country (case-sensitive). Example: United States of America" << endl;
+                std::getline(cin, userInput);
+                std::getline(cin, userInput);
                 getCountryStatistics(rows,userInput);
                 break;
             case 4:
@@ -95,6 +92,8 @@ int main() {
             case -1: // exit
                 running = false;
                 break;
+            default:
+                cout << "Invalid selection! Please pass in the number of the desired operation." << endl;
         }
 
     }
