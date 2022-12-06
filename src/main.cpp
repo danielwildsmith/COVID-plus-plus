@@ -52,7 +52,7 @@ std::vector<Row> LoadCSVRows(string file) {
 
 int main() {
     std::vector<Row> rows = LoadCSVRows("../covidFull.csv");
-    // getDayStatistics(rows, 11, 3, 2020);
+    //getDayStatistics(rows, 11, 3, 2020);
 
     bool running = true;
     // Initial messages
@@ -64,10 +64,16 @@ int main() {
         cout << "1. Days with most cases\n2. Days with most deaths\n3. option3\n-1. Exit program\n";
         cin >> input;
 
-        if (input == -1) { // exit
-            running = false;
-            break;
+        switch (input) {
+            case 1:
+                // Prints the Country/date for top 5 highest cases days 
+                //mergeSortByCases(rows, 0, rows.size()-1);
+                break;
+            case -1: // exit
+                running = false;
+                break;
         }
+
     }
     return 0;
 }
