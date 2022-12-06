@@ -55,6 +55,7 @@ int main() {
     //getDayStatistics(rows, 11, 3, 2020);
     //getDayStatistics(rows, 27, 12 ,2022);
     //getMaxDeaths(rows);
+    //getCountryStatistics(rows, "Spain");
 
     bool running = true;
     // Initial messages
@@ -63,7 +64,7 @@ int main() {
 
     while (running) {
         cout << "Please select an option to continue\n";
-        cout << "1. Days with most cases\n2. Days with most deaths\n3. Countries with Highest Deaths\n-1. Exit program\n";
+        cout << "1. Days with most cases\n2. Days with most deaths\n3. Print the deadliest days\n-1. Exit program\n";
         cin >> input;
 
         switch (input) {
@@ -76,7 +77,7 @@ int main() {
                 //mergeSortByCases(rows, 0, rows.size()-1);
                 break;
             case 3:
-                // Prints the Country for top 5 highest cases days
+                // Prints the top 5 highest death days
                 getMaxDeaths(rows);
                 break;
             case -1: // exit

@@ -98,13 +98,23 @@ void getDayStatistics(vector<Row> &rows, int day, int month, int year)
     vector<std::pair<string, int>> sortedCases = unsortedCases;
     sortedCases = shellSort(sortedCases);
     steady_clock::time_point end = steady_clock::now();
-    cout << "Shell sort finished in " << duration_cast<microseconds>(end - begin).count() << " microseconds" << endl;
+    int shellTime = duration_cast<microseconds>(end - begin).count();
+    cout << "Shell sort finished in " << shellTime << " microseconds" << endl;
 
     begin = steady_clock::now();
     mergeSort(unsortedCases, 0, unsortedCases.size()-1);
     end = steady_clock::now();
-    cout << "Merge sort finished in " << duration_cast<microseconds>(end - begin).count() << " microseconds" << endl;
-    cout << endl;
+    int mergeTime = duration_cast<microseconds>(end - begin).count();
+    cout << "Merge sort finished in " << mergeTime << " microseconds" << endl;
+
+    // Print percentage faster
+    if (shellTime < mergeTime) { // shell was faster
+        float percent = (1 - (float)shellTime / mergeTime) * 100.0;
+        cout << "Shell sort was " << fixed << showpoint << setprecision(2) << percent << "% faster than merge sort.\n\n";
+    } else { // merge was faster
+        float percent = (1 - (float)mergeTime / shellTime) * 100.0;
+        cout << "Merge sort was " << fixed << showpoint << setprecision(2) << percent << "% faster than shell sort.\n\n";
+    }
 
     int numbered = 1;
     cout << "Countries with the Highest Cases on " << month << "/" << day << "/" << year << ": " << endl;
@@ -135,13 +145,23 @@ void getMaxDeaths(vector<Row> &rows)
     vector<std::pair<string, int>> sortedDeaths = unsortedDeaths;
     sortedDeaths = shellSort(sortedDeaths);
     steady_clock::time_point end = steady_clock::now();
-    cout << "Shell sort finished in " << duration_cast<microseconds>(end - begin).count() << " microseconds" << endl;
+    int shellTime =  duration_cast<microseconds>(end - begin).count();
+    cout << "Shell sort finished in " << shellTime << " microseconds" << endl;
 
     begin = steady_clock::now();
     mergeSort(unsortedDeaths, 0, unsortedDeaths.size()-1);
     end = steady_clock::now();
-    cout << "Merge sort finished in " << duration_cast<microseconds>(end - begin).count() << " microseconds" << endl;
-    cout << endl;
+    int mergeTime = duration_cast<microseconds>(end - begin).count();
+    cout << "Merge sort finished in " << mergeTime << " microseconds" << endl;
+
+    // Print percentage faster
+    if (shellTime < mergeTime) { // shell was faster
+        float percent = (1 - (float)shellTime / mergeTime) * 100.0;
+        cout << "Shell sort was " << fixed << showpoint << setprecision(2) << percent << "% faster than merge sort.\n\n";
+    } else { // merge was faster
+        float percent = (1 - (float)mergeTime / shellTime) * 100.0;
+        cout << "Merge sort was " << fixed << showpoint << setprecision(2) << percent << "% faster than shell sort.\n\n";
+    }
 
     int numbered = 1;
     cout << "Countries with the Highest Death Counts in a Day: " << endl;
@@ -194,13 +214,23 @@ void getCountryStatistics(vector<Row> &rows, string name) {
     vector<std::pair<string, int>> sortedDeathsOfCountry = unsortedDeathsOfCountry;
     sortedDeathsOfCountry = shellSort(sortedDeathsOfCountry);
     steady_clock::time_point end = steady_clock::now();
-    cout << "Shell sort finished in " << duration_cast<microseconds>(end - begin).count() << " microseconds" << endl;
+    int shellTime = duration_cast<microseconds>(end - begin).count();
+    cout << "Shell sort finished in " << shellTime << " microseconds" << endl;
 
     begin = steady_clock::now();
     mergeSort(unsortedDeathsOfCountry, 0, unsortedDeathsOfCountry.size()-1);
     end = steady_clock::now();
-    cout << "Merge sort finished in " << duration_cast<microseconds>(end - begin).count() << " microseconds" << endl;
-    cout << endl;
+    int mergeTime = duration_cast<microseconds>(end - begin).count();
+    cout << "Merge sort finished in " << mergeTime << " microseconds" << endl;
+
+    // Print percentage faster
+    if (shellTime < mergeTime) { // shell was faster
+        float percent = (1 - (float)shellTime / mergeTime) * 100.0;
+        cout << "Shell sort was " << fixed << showpoint << setprecision(2) << percent << "% faster than merge sort.\n\n";
+    } else { // merge was faster
+        float percent = (1 - (float)mergeTime / shellTime) * 100.0;
+        cout << "Merge sort was " << fixed << showpoint << setprecision(2) << percent << "% faster than shell sort.\n\n";
+    }
 
     // display statistics
     cout << name << " Statistics:" << endl;
